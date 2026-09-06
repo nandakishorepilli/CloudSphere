@@ -24,3 +24,21 @@ class Student(StudentBase):
     model_config = ConfigDict(from_attributes=True)
     id: int
     created_at: datetime
+
+
+class OtpRequest(BaseModel):
+    email: EmailStr
+    role: str = Field(pattern="^(admin|user)$")
+
+
+class OtpVerify(OtpRequest):
+    code: str = Field(pattern=r"^\d{6}$")
+
+
+class ManagedUserCreate(BaseModel):
+    full_name: str = Field(min_length=2, max_length=100)
+    email: EmailStr
+
+
+class ManagedUserUpdate(BaseModel):
+    is_active: bool

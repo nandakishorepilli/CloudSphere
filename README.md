@@ -51,6 +51,14 @@ python -m uvicorn app.main:app --reload
 
 Open [http://127.0.0.1:8000](http://127.0.0.1:8000) in your browser.
 
+## Authentication and roles
+
+Cloud Sphere is a client-facing platform: `/` is a login-only page and there is no public sign-up flow. Accounts use email and a one-time password (OTP), not stored passwords. The first local administrator is `admin@cloudsphere.com` (override with `CLOUDSPHERE_ADMIN_EMAIL`). In development, the generated code is returned only by the OTP API and written to the server log to make local testing possible. Set `CLOUDSPHERE_ENV=production` before deployment and connect an email provider in `app/otp_service.py`; production does not return the OTP.
+
+- Admins authenticate to `/admin`, where they create, activate, deactivate, and delete user accounts and inspect audit activity.
+- Users authenticate to `/dashboard`, the existing student data workspace.
+- OTPs expire after five minutes, are single-use, and allow five verification attempts. Sessions and all data APIs require authentication.
+
 ## API endpoints
 
 - `GET /api/students` — list students; supports `?search=term`

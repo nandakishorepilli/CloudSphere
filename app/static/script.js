@@ -11,6 +11,7 @@ function showToast(message) { const toast = $('#toast'); toast.textContent = mes
 
 async function request(url, options = {}) {
   const response = await fetch(url, options);
+  if (response.status === 401) { window.location.href = '/'; throw new Error('Your session has ended.'); }
   if (!response.ok) {
     const data = await response.json().catch(() => ({}));
     throw new Error(data.detail || 'Something went wrong. Please try again.');
@@ -88,6 +89,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   document.querySelectorAll('.nav-link').forEach((button) => button.addEventListener('click', () => showPage(button.dataset.page)));
   document.querySelectorAll('[data-go-students]').forEach((button) => button.addEventListener('click', () => showPage('students')));
   $('#menuButton').addEventListener('click', () => $('#sidebar').classList.toggle('open'));
+  $('#logoutButton').addEventListener('click', async () => { await fetch('/api/auth/logout', { method: 'POST' }); window.location.href = '/'; });
   $('#dashboardAddButton').addEventListener('click', () => openStudentModal());
   $('#addStudentButton').addEventListener('click', () => openStudentModal());
   document.querySelectorAll('[data-close-modal]').forEach((button) => button.addEventListener('click', closeStudentModal));

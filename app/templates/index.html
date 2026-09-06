@@ -6,11 +6,14 @@
   <title>Cloud Sphere | College Data Hub</title>
   <link rel="stylesheet" href="/static/style.css">
   <link rel="stylesheet" href="/static/modal.css">
+  <link rel="stylesheet" href="/static/dashboard-extra.css">
 </head>
 <body>
   <div class="app-shell">
     <aside class="sidebar" id="sidebar">
-      <a class="brand" href="#dashboard"><span class="brand-mark">☁</span><span>Cloud <b>Sphere</b></span></a>
+      <a class="brand" href="#dashboard">
+        <img class="brand-logo" src="/static/cloud-sphere-logo.png" alt="Cloud Sphere">
+      </a>
       <p class="workspace-label">COLLEGE WORKSPACE</p>
       <nav>
         <button class="nav-link active" data-page="dashboard"><span>▦</span> Dashboard</button>
@@ -23,7 +26,7 @@
       <header class="header">
         <button class="menu-button" id="menuButton" aria-label="Toggle menu">☰</button>
         <div><p class="eyebrow">COLLEGE DATA PLATFORM</p><h1 id="pageTitle">Dashboard</h1></div>
-        <div class="local-badge"><span class="status-dot"></span> Local server</div>
+        <div class="header-actions"><div class="local-badge"><span class="status-dot"></span> Local server</div><button class="secondary-button" id="logoutButton">Log out</button></div>
       </header>
 
       <section id="dashboardPage" class="page active-page">
