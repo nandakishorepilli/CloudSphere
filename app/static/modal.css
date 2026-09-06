@@ -1,0 +1,4 @@
+/* The base backdrop uses display:grid; honour the HTML hidden attribute. */
+.modal-backdrop[hidden] {
+  display: none;
+}

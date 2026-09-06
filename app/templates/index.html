@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cloud Sphere | College Data Hub</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="stylesheet" href="/static/modal.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#dashboard"><span class="brand-mark">☁</span><span>Cloud <b>Sphere</b></span></a>
+      <p class="workspace-label">COLLEGE WORKSPACE</p>
+      <nav>
+        <button class="nav-link active" data-page="dashboard"><span>▦</span> Dashboard</button>
+        <button class="nav-link" data-page="students"><span>♙</span> Students</button>
+      </nav>
+      <div class="sidebar-footer"><span class="status-dot"></span> Local database online</div>
+    </aside>
+
+    <main class="main-content">
+      <header class="header">
+        <button class="menu-button" id="menuButton" aria-label="Toggle menu">☰</button>
+        <div><p class="eyebrow">COLLEGE DATA PLATFORM</p><h1 id="pageTitle">Dashboard</h1></div>
+        <div class="local-badge"><span class="status-dot"></span> Local server</div>
+      </header>
+
+      <section id="dashboardPage" class="page active-page">
+        <div class="welcome-row"><div><h2>Good to see you</h2><p>Here is an overview of your college data environment.</p></div><button class="primary-button" id="dashboardAddButton">+ Add student</button></div>
+        <div class="stats-grid">
+          <article class="stat-card"><div class="card-icon blue">♙</div><div><p>Total students</p><strong id="totalStudents">—</strong><small>Across the college</small></div></article>
+          <article class="stat-card"><div class="card-icon purple">▦</div><div><p>Departments</p><strong id="totalDepartments">—</strong><small>With active records</small></div></article>
+          <article class="stat-card"><div class="card-icon green">✓</div><div><p>Database status</p><strong id="databaseStatus">—</strong><small>SQLite on this device</small></div></article>
+        </div>
+        <div class="dashboard-grid">
+          <article class="panel"><div class="panel-heading"><div><h3>Students by department</h3><p>Distribution of stored records</p></div></div><div id="departmentStats" class="metric-list"></div></article>
+          <article class="panel"><div class="panel-heading"><div><h3>Students by year</h3><p>Academic-year overview</p></div></div><div id="yearStats" class="metric-list"></div></article>
+          <article class="panel recent-panel"><div class="panel-heading"><div><h3>Recently added</h3><p>Latest student records</p></div><button class="text-button" data-go-students>View all</button></div><div id="recentStudents" class="recent-list"></div></article>
+        </div>
+      </section>
+
+      <section id="studentsPage" class="page">
+        <div class="students-toolbar"><div><h2>Student directory</h2><p>Manage student records in the local college database.</p></div><button class="primary-button" id="addStudentButton">+ Add student</button></div>
+        <div class="table-panel">
+          <div class="table-controls"><label class="search-box"><span>⌕</span><input id="searchInput" type="search" placeholder="Search name, email, or department"></label><span id="studentCount" class="results-count"></span></div>
+          <div class="table-wrap"><table><thead><tr><th>Student</th><th>Contact</th><th>Department</th><th>Year</th><th>Created</th><th></th></tr></thead><tbody id="studentsTable"></tbody></table></div>
+          <div id="emptyState" class="empty-state" hidden>No students match your search.</div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="studentModal" hidden><div class="modal" role="dialog" aria-modal="true"><div class="modal-header"><div><p class="eyebrow">STUDENT RECORD</p><h2 id="modalTitle">Add student</h2></div><button class="close-button" data-close-modal aria-label="Close">×</button></div><form id="studentForm"><div class="form-grid"><label>Full name<input name="full_name" required minlength="2" maxlength="100" placeholder="e.g. Maya Rao"></label><label>Email<input name="email" type="email" required placeholder="maya@college.edu"></label><label>Phone<input name="phone" required minlength="5" maxlength="30" placeholder="Phone number"></label><label>Department<input name="department" required minlength="2" maxlength="100" placeholder="e.g. Computer Science"></label><label>Year<select name="year" required><option value="1">Year 1</option><option value="2">Year 2</option><option value="3">Year 3</option><option value="4">Year 4</option><option value="5">Year 5</option></select></label></div><p id="formError" class="form-error" hidden></p><div class="modal-actions"><button type="button" class="secondary-button" data-close-modal>Cancel</button><button class="primary-button" type="submit" id="saveStudentButton">Save student</button></div></form></div></div>
+  <div class="modal-backdrop" id="deleteModal" hidden><div class="modal confirmation" role="dialog" aria-modal="true"><div class="modal-header"><div><p class="eyebrow">CONFIRM ACTION</p><h2>Delete student?</h2></div><button type="button" class="close-button" data-close-delete aria-label="Close">×</button></div><p id="deleteMessage">This will permanently remove this student record.</p><div class="modal-actions"><button type="button" class="secondary-button" data-close-delete>Cancel</button><button type="button" class="danger-button" id="confirmDeleteButton">Delete student</button></div></div></div>
+  <div id="toast" class="toast" hidden></div>
+  <script src="/static/script.js"></script>
+</body>
+</html>
